@@ -1,6 +1,8 @@
 package org.example;
 
-class Car {
+import java.util.Comparator;
+
+class Car implements Comparable<Car> {
     String makeModel;
     double engineSizeL;
     int prodYear;
@@ -11,6 +13,18 @@ class Car {
         this.prodYear = prodYear;
     }
 
+    public String getMakeModel() {
+        return makeModel;
+    }
+
+    public double getEngineSizeL() {
+        return engineSizeL;
+    }
+
+    public int getProdYear() {
+        return prodYear;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
@@ -19,5 +33,20 @@ class Car {
                 ", prodYear=" + prodYear +
                 '}';
     }
+
+    @Override
+    public int compareTo(Car otherCar) {
+        return makeModel.compareTo(otherCar.getMakeModel());
+    }
+
+    public static final CarsSortByEngineSize SORT_BY_ENGINE_SIZE = new CarsSortByEngineSize();
+
+    static class CarsSortByEngineSize implements Comparator<Car> {
+        @Override
+        public int compare(Car o1, Car o2) {
+            return (int)(o1.engineSizeL*1000000 - o2.engineSizeL*1000000);
+        }
+    }
+
 }
 
