@@ -1,0 +1,5 @@
+Toyota Camry;2.5;2020
+Volvo XC90";2.0;2019
+Ford Mustang";5.0;2021
+Nissan Leaf";2.5;2020
+Jeep Wrangler";3.5;2017

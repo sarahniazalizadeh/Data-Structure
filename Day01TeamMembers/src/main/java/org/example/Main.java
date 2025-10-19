@@ -6,28 +6,31 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
+
+    static HashMap<String, ArrayList<String>> playersByTeams = new HashMap<>();
+
     public static void main(String[] args) {
 
-        File file = new File("teams.txt");
-        HashMap<String, ArrayList<String>> memberToTeams = new HashMap<>();
+        try (Scanner fileInput = new Scanner(new File("teams.txt"))) {
+            while (fileInput.hasNextLine()) {
+                String line = fileInput.nextLine();
+                String[] lineSplit = line.split(":");
 
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String teamName = line.split(":")[0];
-                String members = line.split(":")[1];
-                String[] memberList = members.split(",");
+                if (lineSplit.length != 2) continue;
 
-                for (String member : memberList) {
-                    memberToTeams.computeIfAbsent(member, k -> new ArrayList<>()).add(teamName);
+                String teamName = lineSplit[0];
+                String[] teamMembers = lineSplit[1].split(",");
+
+                for (String member : teamMembers) {
+                    playersByTeams.computeIfAbsent(member, k -> new ArrayList<>()).add(teamName);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        for (String member : memberToTeams.keySet()) {
-            System.out.println(member + " plays in: " + String.join(", ", memberToTeams.get(member)));
+        for (String member : playersByTeams.keySet()) {
+            System.out.println(member + " plays in: " + String.join(", ", playersByTeams.get(member)));
         }
     }
 }
