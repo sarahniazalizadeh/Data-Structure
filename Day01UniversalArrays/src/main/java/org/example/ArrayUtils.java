@@ -1,13 +1,24 @@
 package org.example;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 public class ArrayUtils {
 
     private static final Scanner input = new Scanner(System.in);
+
+//    static int inputInt() {
+//        while (true) {
+//            try {
+//                return input.nextInt();
+//            } catch (InputMismatchException ex) {
+//                input.nextInt();
+//                System.out.println("Not an integer, try again:");
+//            }
+//        }
+//    }
 
     static void inputArray(int[] data) {
         if (data == null) {
@@ -36,7 +47,13 @@ public class ArrayUtils {
         for (int i = 0; i < data2d.length; i++) {
             for (int j = 0; j < data2d[i].length; j++) {
                 System.out.println("Enter value row " + (i + 1) + " column " + (j + 1) + ": ");
-                data2d[i][j] = input.nextInt();
+                if (input.hasNextInt()) {
+                    data2d[i][j] = input.nextInt();
+                } else {
+                    System.out.println("Invalid input. Please enter an integer.");
+                    input.next();
+                    j--;
+                }
             }
         }
         printArray(data2d);
@@ -66,10 +83,11 @@ public class ArrayUtils {
         }
         int longestRowLength = 0;
         for (int i = 0; i < data2d.length; i++) {
-            int length = data2d[i].length;
-            if (length > longestRowLength) {
-                longestRowLength = length;
-            }
+//            int length = data2d[i].length;
+//            if (length > longestRowLength) {
+//                longestRowLength = length;
+//            }
+            longestRowLength = (data2d[i].length > longestRowLength) ? data2d[i].length : longestRowLength;
         }
         int[] maxLengthNumbers = new int[longestRowLength];
 
@@ -80,9 +98,10 @@ public class ArrayUtils {
                 if (col < data2d[row].length) {
 
                     int length = String.valueOf(data2d[row][col]).length();
-                    if (length > maxLengthNumbers[col]) {
-                        maxLengthNumbers[col] = length;
-                    }
+                    maxLengthNumbers[col] = (length > maxLengthNumbers[col]) ? length : maxLengthNumbers[col];
+//                    if (length > maxLengthNumbers[col]) {
+//                        maxLengthNumbers[col] = length;
+//                    }
                 }
             }
         }
@@ -90,17 +109,18 @@ public class ArrayUtils {
         for (int i = 0; i < data2d.length; i++) {
             for (int j = 0; j < data2d[i].length; j++) {
 
-                System.out.printf("%" + maxLengthNumbers[j] + "s", data2d[i][j]);
-                if (j < data2d[i].length - 1) {
-                    System.out.print(", ");
-                }
+                System.out.printf("%s%" + maxLengthNumbers[j] + "d", (j==0 ? "" : ", "), data2d[i][j]);
             }
-            if (i < data2d.length - 1) {
-                System.out.print("\n");
-            }
+//                if (j < data2d[i].length - 1) {
+//                    System.out.print(", ");
+//                }
+//            }
+//            if (i < data2d.length - 1) {
+//                System.out.print("\n");
+//            }
 
         }
-        System.out.println("computed colsSizes: ");
+        System.out.println("\n\ncomputed colsSizes: ");
         printArray(maxLengthNumbers);
     }
 

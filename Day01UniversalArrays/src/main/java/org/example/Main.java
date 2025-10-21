@@ -6,11 +6,11 @@ public class Main {
     public static void main(String[] args) {
         ArrayUtils arrayUtils = new ArrayUtils();
 
-//        int[] data = new int[5];
-//        arrayUtils.inputArray(data);
+        int[] data = new int[5];
+        arrayUtils.inputArray(data);
 
-//        int[][] data2d = new int[4][3];
-//        arrayUtils.inputArray(data2d);
+        int[][] data2d = new int[4][3];
+        arrayUtils.inputArray(data2d);
 
         int[] a1 = {1, 2, 3, 0, 3, 5};
         int[] a2 = {7, 5, 3, 3, 0};
