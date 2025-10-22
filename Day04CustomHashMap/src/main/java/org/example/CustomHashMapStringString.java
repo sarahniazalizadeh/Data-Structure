@@ -2,6 +2,9 @@ package org.example;
 
 public class CustomHashMapStringString {
 
+    private int size = 7;
+    private Container[] hashTable;
+
     private class Container {
         Container next;
         String key;
@@ -9,7 +12,10 @@ public class CustomHashMapStringString {
     }
 
     // size must be a prime number always
-    private Container [] hashTable = new Container[5];
+
+    public CustomHashMapStringString() {
+        hashTable = new Container[size];
+    }
 
     private int totalItems;
 
@@ -70,7 +76,16 @@ public class CustomHashMapStringString {
 
     int getSize() { return totalItems; }
 
-    public void printDebug() { } // print hashTable content, see example below
+    public void printDebug() {
+        for(int i=0; i < hashTable.length; i++){
+            System.out.println(i + ": ");
+            Container temp = hashTable[i];
+            while(temp != null){
+                System.out.println("   { " + temp.key + " : " + temp.value + " }");
+                temp = temp.next;
+            }
+        }
+    } // print hashTable content, see example below
 
 //    @Override
 //    public String toString() {
