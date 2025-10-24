@@ -1,6 +1,6 @@
 package org.example;
 
-public class Pair<K,V> {
+public class Pair<K extends Comparable<K>, V> implements Comparable<Pair<K, V>> {
     K key;
     V val;
 
@@ -9,4 +9,8 @@ public class Pair<K,V> {
         this.val = val;
     }
 
+    @Override
+    public int compareTo(Pair<K, V> o) {
+        return key.compareTo(o.key);
+    }
 }

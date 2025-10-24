@@ -2,40 +2,25 @@ package org.example;
 
 import java.util.Arrays;
 
-public class CustomHashMapStringString {
+public class CustomHashMap<K extends Comparable<K> & HashValueGenerator<K>, V> {
 
-    private int size = 7;
-    private Container[] hashTable;
-
-    private class Container {
+    private class Container<K2 extends Comparable<K2>, V2> {
         Container next;
-        String key;
-        String value;
+        K2 key;
+        V2 value;
     }
 
     // size must be a prime number always
 
-    public CustomHashMapStringString() {
-        hashTable = new Container[size];
-    }
-
+    int size = 5;
+    private Container[] hashTable = new Container[size];
     private int totalItems;
 
-    private int computeHashValue(String key) { // hashing function
-        int hash = 0;
-        for (int i = 0; i < key.length(); i++) {
-            hash <<= 2;  // same as: hash *= 4
-            char c = key.charAt(i);
-            hash += c;
-        }
-        return hash;
-    }
-
-    void putValue(String key, String value) {
-        int hashValue = computeHashValue(key);
+    void putValue(K key, V value) {
+        int hashValue = key.computeHashValue(key);
         int index = Math.abs(hashValue) % hashTable.length;
 
-        Container current = hashTable[index];
+        Container<K, V> current = hashTable[index];
         while (current != null) {
             if (current.key.equals(key)) {
                 current.value = value;
@@ -43,7 +28,7 @@ public class CustomHashMapStringString {
             }
             current = current.next;
         }
-        Container newContainer = new Container();
+        Container<K, V> newContainer = new Container();
         newContainer.key = key;
         newContainer.value = value;
         newContainer.next = hashTable[index];
@@ -52,10 +37,10 @@ public class CustomHashMapStringString {
     }
     // LATER: expand hashTable by about *2 when totalItems > 3*hashTable.length
 
-    boolean hasKey(String key) {
-        int hashValue = computeHashValue(key);
+    boolean hasKey(K key) {
+        int hashValue = key.computeHashValue(key);
         int index = Math.abs(hashValue) % hashTable.length;
-        Container temp = hashTable[index];
+        Container<K, V> temp = hashTable[index];
         while (temp != null) {
             if (temp.key.equals(key)) {
                 return true;
@@ -66,10 +51,10 @@ public class CustomHashMapStringString {
     }
 
     // throw custom unchecked KeyNotFoundException
-    String getValue(String key) {
-        int hashValue = computeHashValue(key);
+    V getValue(K key) {
+        int hashValue = key.computeHashValue(key);
         int index = Math.abs(hashValue) % hashTable.length;
-        Container temp = hashTable[index];
+        Container<K, V> temp = hashTable[index];
         while (temp != null) {
             if (temp.key.equals(key)) {
                 return temp.value;
@@ -79,11 +64,11 @@ public class CustomHashMapStringString {
         throw new KeyNotFoundException("Key not found: " + key);
     }    // throw custom unchecked KeyNotFoundException
 
-    void deleteByKey(String key) {
-        int hashValue = computeHashValue(key);
+    void deleteByKey(K key) {
+        int hashValue = key.computeHashValue(key);
         int index = Math.abs(hashValue) % hashTable.length;
-        Container temp = hashTable[index];
-        Container pre = null;
+        Container<K, V> temp = hashTable[index];
+        Container<K, V> pre = null;
         while (temp != null) {
             if (temp.key.equals(key)) {
                 if (pre == null) {
@@ -101,12 +86,12 @@ public class CustomHashMapStringString {
         throw new KeyNotFoundException("Key not found: " + key);
     }
 
-    public String[] getAllKeys() {
-        String[] result = new String[totalItems];
+    public K[] getAllKeys(K[] template) {
+        K[] result = (K[]) java.lang.reflect.Array.newInstance(template.getClass().getComponentType(), size);
         int counter = 0;
         for (int i = 0; i < size; i++) {
             if (hashTable[i] != null) {
-                Container temp = hashTable[i];
+                Container<K, V> temp = hashTable[i];
                 while (temp != null) {
                     result[counter++] = temp.key;
                     temp = temp.next;
@@ -118,12 +103,12 @@ public class CustomHashMapStringString {
     }
 // Generic version: public K[] getAllKeys(K[] template) { ... }
 
-    public Pair<String, String>[] getAllKeyValPairs() {
-        Pair<String, String>[] result = new Pair[totalItems];
+    public Pair<K, V>[] getAllKeyValPairs() {
+        Pair<K, V>[] result = (Pair<K, V>[]) new Pair[totalItems];
         int counter = 0;
         for (int i = 0; i < size; i++) {
             if (hashTable[i] != null) {
-                Container temp = hashTable[i];
+                Container<K, V> temp = hashTable[i];
                 while (temp != null) {
                     result[counter++] = new Pair<>(temp.key, temp.value);
                     temp = temp.next;
@@ -141,7 +126,7 @@ public class CustomHashMapStringString {
     public void printDebug() {
         for (int i = 0; i < hashTable.length; i++) {
             System.out.println(i + ": ");
-            Container temp = hashTable[i];
+            Container<K, V> temp = hashTable[i];
             while (temp != null) {
                 System.out.println("   { " + temp.key + " : " + temp.value + " }");
                 temp = temp.next;
@@ -151,7 +136,8 @@ public class CustomHashMapStringString {
 
     @Override
     public String toString() {
-        String[] keys = getAllKeys();
+        K[] template = (K[]) java.lang.reflect.Array.newInstance(template.getClass().getComponentType(), size);
+        K[] keys = getAllKeys(template);
         StringBuilder sb = new StringBuilder();
         sb.append("[ ");
         for (int i = 0; i < keys.length; i++) {

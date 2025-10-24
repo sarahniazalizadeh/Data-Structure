@@ -3,18 +3,25 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
-        CustomHashMapStringString myHashTable = new CustomHashMapStringString();
-        myHashTable.putValue("paint","red");
-        myHashTable.putValue("apple","green");
-        myHashTable.putValue("sky","blue");
-        myHashTable.putValue("banana","yellow");
-        myHashTable.putValue("cloud","white");
-        myHashTable.putValue("apple","red");
 
-        myHashTable.deleteByKey("apple");
-        myHashTable.printDebug();
+        CustomHashMap<Person, String> myHashTable = new CustomHashMap<Person,String>();
 
-        System.out.println(myHashTable.hasKey("paint"));
+
+
+//        CustomHashMapStringString myHashTable = new CustomHashMapStringString();
+//        myHashTable.putValue("paint","red");
+//        myHashTable.putValue("apple","green");
+//        myHashTable.putValue("sky","blue");
+//        myHashTable.putValue("banana","yellow");
+//        myHashTable.putValue("cloud","white");
+//        myHashTable.putValue("apple","red");
+//
+//        myHashTable.deleteByKey("apple");
+//        myHashTable.printDebug();
+
+//        System.out.println(myHashTable.toString());
+//        System.out.println(myHashTable.hasKey("paint"));
+
 
 //        for (String key : myHashTable.getAllKeys()) {
 //            System.out.println("Key: " + key);
