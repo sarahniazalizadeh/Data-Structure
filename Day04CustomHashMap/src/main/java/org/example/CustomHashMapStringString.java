@@ -151,11 +151,12 @@ public class CustomHashMapStringString {
 
     @Override
     public String toString() {
-        String[] keys = getAllKeys();
+        Pair<String, String>[] pairs = getAllKeyValPairs();
+        Arrays.sort(pairs);
         StringBuilder sb = new StringBuilder();
         sb.append("[ ");
-        for (int i = 0; i < keys.length; i++) {
-            sb.append((i == 0 ? "" : ", ") + keys[i] + " => " + getValue(keys[i]));
+        for (int i = 0; i < pairs.length; i++) {
+            sb.append((i == 0 ? "" : ", ") + pairs[i].key + " => " + pairs[i].val);
         }
         sb.append(" ]");
         return sb.toString();

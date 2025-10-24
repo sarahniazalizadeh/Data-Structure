@@ -136,12 +136,12 @@ public class CustomHashMap<K extends Comparable<K> & HashValueGenerator<K>, V> {
 
     @Override
     public String toString() {
-        K[] template = (K[]) java.lang.reflect.Array.newInstance(template.getClass().getComponentType(), size);
-        K[] keys = getAllKeys(template);
+        Pair<K,V>[] pairs = getAllKeyValPairs();
+        Arrays.sort(pairs);
         StringBuilder sb = new StringBuilder();
         sb.append("[ ");
-        for (int i = 0; i < keys.length; i++) {
-            sb.append((i == 0 ? "" : ", ") + keys[i] + " => " + getValue(keys[i]));
+        for (int i = 0; i < pairs.length; i++) {
+            sb.append((i == 0 ? "" : ", ") + pairs[i].key + " => " + pairs[i].val);
         }
         sb.append(" ]");
         return sb.toString();
