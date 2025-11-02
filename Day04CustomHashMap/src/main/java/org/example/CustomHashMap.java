@@ -87,7 +87,8 @@ public class CustomHashMap<K extends Comparable<K> & HashValueGenerator<K>, V> {
     }
 
     public K[] getAllKeys(K[] template) {
-        K[] result = (K[]) java.lang.reflect.Array.newInstance(template.getClass().getComponentType(), size);
+//        K[] result = (K[]) java.lang.reflect.Array.newInstance(template.getClass().getComponentType(), size);
+        K[] result = (K[]) new Comparable[totalItems];
         int counter = 0;
         for (int i = 0; i < size; i++) {
             if (hashTable[i] != null) {
@@ -134,19 +135,36 @@ public class CustomHashMap<K extends Comparable<K> & HashValueGenerator<K>, V> {
         }
     } // print hashTable content, see example below
 
-    @Override
-    public String toString() {
-        K[] template = (K[]) java.lang.reflect.Array.newInstance(template.getClass().getComponentType(), size);
-        K[] keys = getAllKeys(template);
-        StringBuilder sb = new StringBuilder();
-        sb.append("[ ");
-        for (int i = 0; i < keys.length; i++) {
-            sb.append((i == 0 ? "" : ", ") + keys[i] + " => " + getValue(keys[i]));
-        }
-        sb.append(" ]");
-        return sb.toString();
-    } // comma-separated key->value pair list
+    //    @Override
+//    public String toString() {
+//        K[] keys = getAllKeys();
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("[ ");
+//        for (int i = 0; i < keys.length; i++) {
+//            sb.append((i == 0 ? "" : ", ") + keys[i] + " => " + getValue(keys[i]));
+//        }
+//        sb.append(" ]");
+//        return sb.toString();
+//    } // comma-separated key->value pair list
 // to be able to use this as validation in Unit tests keys must be sorted
 // e.g. [Key1=>Val1, Key2 => Val2, ... ]
-
+    @Override
+    public String toString() {
+        for (int i = 0; i < hashTable.length; i++) {
+            Container<K, V> temp = hashTable[i];
+            if (temp != null) {
+                K[] keys = getAllKeys((K[]) java.lang.reflect.Array.newInstance(temp.key.getClass(), totalItems));
+                StringBuilder sb = new StringBuilder();
+                sb.append("[ ");
+                for (int j = 0; j < keys.length; j++) {
+                    if (keys[j] != null) {
+                        sb.append((j == 0 ? "" : ", ") + keys[j] + " => " + getValue(keys[j]));
+                    }
+                }
+                sb.append(" ]");
+                return sb.toString();
+            }
+        }
+        return "[ ]";
+    }
 }
