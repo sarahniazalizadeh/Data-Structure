@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Day01ArrayCross/Day01ArrayCross.iml" filepath="$PROJECT_DIR$/Day01ArrayCross/Day01ArrayCross.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day01CachingFibonacci/Day01CachingFibonacci.iml" filepath="$PROJECT_DIR$/Day01CachingFibonacci/Day01CachingFibonacci.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day01CarsSorted/Day01CarsSorted.iml" filepath="$PROJECT_DIR$/Day01CarsSorted/Day01CarsSorted.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day01TeamMembers/Day01TeamMembers.iml" filepath="$PROJECT_DIR$/Day01TeamMembers/Day01TeamMembers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day01UniversalArrays/Day01UniversalArrays.iml" filepath="$PROJECT_DIR$/Day01UniversalArrays/Day01UniversalArrays.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day04ArrayListOwnImpl/Day04ArrayListOwnImpl.iml" filepath="$PROJECT_DIR$/Day04ArrayListOwnImpl/Day04ArrayListOwnImpl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day04CustomHashMap/Day04CustomHashMap.iml" filepath="$PROJECT_DIR$/Day04CustomHashMap/Day04CustomHashMap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day05LinkedListArray/Day05LinkedListArray.iml" filepath="$PROJECT_DIR$/Day05LinkedListArray/Day05LinkedListArray.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day08DirectorySize/Day08DirectorySize.iml" filepath="$PROJECT_DIR$/Day08DirectorySize/Day08DirectorySize.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day09FirstFractal/Day09FirstFractal.iml" filepath="$PROJECT_DIR$/Day09FirstFractal/Day09FirstFractal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day09TriangleEasier/Day09TriangleEasier.iml" filepath="$PROJECT_DIR$/Day09TriangleEasier/Day09TriangleEasier.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day09TriangleHarder/Day09TriangleHarder.iml" filepath="$PROJECT_DIR$/Day09TriangleHarder/Day09TriangleHarder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Source Code Solutions.iml" filepath="$PROJECT_DIR$/.idea/Source Code Solutions.iml" />
+    </modules>
+  </component>
+</project>
